@@ -13,6 +13,7 @@ namespace Sistema_de_Login
 {
     public partial class Form1 : Form
     {
+        Thread nt; //criação da Thead como se fosse uma variavel
         public Form1()
         {
             InitializeComponent();
@@ -37,8 +38,11 @@ namespace Sistema_de_Login
         {
             if (textBoxUser.Text == "Yasha" && textBoxSenha.Text == "270221")
             {
-                MessageBox.Show("Bem vindo ao sistema!", "Acesso ao Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                // MessageBox.Show("Bem vindo ao sistema!", "Acesso ao Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close(); //Neste caso iremos ja fechar o primeiro formulario e iremos ja para o segundo formulario
+                nt = new Thread(formulario2);
+                nt.SetApartmentState(ApartmentState.STA);
+                nt.Start();
             }
             else
             {
@@ -56,6 +60,10 @@ namespace Sistema_de_Login
         {
 
 
+        }
+        private void formulario2(object obj)
+        {
+            Application.Run(new FormDeLogin());
         }
     }
 }
